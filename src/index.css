@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #f4f6f9;
+    color: #1e293b;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rajdhani', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  ::-webkit-scrollbar { width: 7px; }
+  ::-webkit-scrollbar-track { background: #e2e8f0; }
+  ::-webkit-scrollbar-thumb {
+    background: #1a3a6b;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #f97316; }
+
+  ::selection { background: rgba(249, 115, 22, 0.2); color: #1e293b; }
+}
+
+@layer utilities {
+  /* Government-style card */
+  .gov-card {
+    background: #ffffff;
+    border: 1px solid #dde3ed;
+    box-shadow: 0 2px 8px rgba(26, 58, 107, 0.06), 0 1px 2px rgba(0,0,0,0.04);
+    border-radius: 12px;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .gov-card:hover {
+    box-shadow: 0 8px 24px rgba(26, 58, 107, 0.12);
+    border-color: #b0bfd6;
+  }
+
+  /* Saffron accent bar (left-border highlight) */
+  .accent-bar {
+    border-left: 4px solid #f97316;
+  }
+
+  /* Input focus style */
+  .input-gov:focus {
+    outline: none;
+    border-color: #1a3a6b !important;
+    box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.12);
+  }
+
+  /* Section header line */
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #f97316;
+  }
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 3px;
+    background: #f97316;
+    border-radius: 2px;
+  }
+
+  /* Page enter animation */
+  .page-fade {
+    animation: pageFade 0.4s ease-out both;
+  }
+  @keyframes pageFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Navy-to-saffron gradient text */
+  .text-gov-gradient {
+    background: linear-gradient(90deg, #1a3a6b, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
