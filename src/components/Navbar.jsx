@@ -5,15 +5,15 @@ import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { MdOutlineVerified } from 'react-icons/md';
 
 const navLinks = [
-  { name: 'Home',      path: '/' },
-  { name: 'About Us',  path: '/about' },
-  { name: 'Projects',  path: '/projects' },
-  { name: 'Tenders',   path: '/tenders' },
-  { name: 'Contact',   path: '/contact' },
+  { name: 'Home', path: '/' },
+  { name: 'About Us', path: '/about' },
+  { name: 'Projects', path: '/projects' },
+  // { name: 'Tenders',   path: '/tenders' },
+  { name: 'Contact', path: '/contact' },
 ];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen]     = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -27,11 +27,10 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${scrolled
           ? 'bg-[#0f2044] shadow-xl py-3 border-b border-white/10'
           : 'bg-[#0f2044] py-4'
-      }`}
+        }`}
     >
       {/* Top accent stripe — India saffron */}
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#f97316] via-[#fbbf24] to-[#f97316]" />
@@ -59,11 +58,10 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative px-4 py-2 text-sm font-semibold tracking-wide transition-colors rounded-md ${
-                  active
+                className={`relative px-4 py-2 text-sm font-semibold tracking-wide transition-colors rounded-md ${active
                     ? 'text-white bg-white/10'
                     : 'text-blue-100/80 hover:text-white hover:bg-white/8'
-                }`}
+                  }`}
               >
                 {link.name}
                 {active && (
@@ -109,11 +107,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`px-6 py-3 text-sm font-semibold transition-colors border-l-4 ${
-                    location.pathname === link.path
+                  className={`px-6 py-3 text-sm font-semibold transition-colors border-l-4 ${location.pathname === link.path
                       ? 'text-white border-[#f97316] bg-white/5'
                       : 'text-blue-100/80 border-transparent hover:text-white hover:border-[#f97316]/50'
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </Link>
