@@ -6,19 +6,20 @@ import { FiMapPin, FiZap, FiCalendar, FiShield, FiTrendingUp, FiArrowRight, FiIn
 // Marker cx/cy are stored as percentages of the original 1536x1024 PNG
 const IndiaMap = ({ activeProjectId, setActiveProjectId, projects }) => {
   return (
-    <div className="relative w-full h-[380px] sm:h-[450px] lg:h-[400px] xl:h-[440px] bg-slate-950/5 rounded-3xl overflow-hidden border border-slate-200/60 shadow-inner flex items-center justify-center">
-      {/* Map Image — object-contain ensures the full map is visible */}
-      <img src="/map.png" alt="India map" className="absolute inset-0 w-full h-full object-contain" />
+    <div className="relative w-full max-w-[500px] lg:max-w-none mx-auto aspect-[3/2] bg-slate-950/5 rounded-3xl overflow-hidden border border-slate-200/60 shadow-inner flex items-center justify-center">
+      {/* Map Image — fills the aspect-ratio container exactly */}
+      <img src="/map.png" alt="India map" className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" />
       {/* Markers use percentage positioning so they scale with the contained image */}
       {projects.map(p => {
         const isActive = activeProjectId === p.id;
         return (
           <div
             key={p.id}
-            className="absolute cursor-pointer"
+            className="absolute cursor-pointer z-10"
             style={{ left: `${p.cx}%`, top: `${p.cy}%`, transform: 'translate(-50%, -50%)' }}
             onMouseEnter={() => setActiveProjectId(p.id)}
             onMouseLeave={() => setActiveProjectId(null)}
+            onClick={() => setActiveProjectId(activeProjectId === p.id ? null : p.id)}
           >
             {/* Glow ring for active marker */}
             {isActive && (
@@ -137,21 +138,22 @@ const Projects = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Map Column */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-5 bg-white/90 backdrop-blur-md border border-slate-200/70 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between" style={{ boxShadow: '0 20px 45px rgba(15,32,68,0.06), 0 1px 3px rgba(0,0,0,0.01)' }}>
-            <div className="flex items-center justify-between mb-4">
-              <span className="inline-flex items-center gap-2 px-3 py-1 bg-orange-50 border border-orange-200/50 rounded-full text-xs font-bold text-[#f97316]">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-5 bg-white/90 backdrop-blur-md border border-slate-200/70 rounded-3xl p-4 sm:p-6 relative overflow-hidden flex flex-col justify-between" style={{ boxShadow: '0 20px 45px rgba(15,32,68,0.06), 0 1px 3px rgba(0,0,0,0.01)' }}>
+            <div className="flex items-center justify-between gap-2 mb-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1 bg-orange-50 border border-orange-200/50 rounded-full text-xs font-bold text-[#f97316] whitespace-nowrap shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-ping" />
                 Interactive Map
               </span>
-              <span className="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Hover markers to inspect</span>
+              <span className="sm:hidden text-[10px] text-slate-400 font-bold tracking-wider uppercase whitespace-nowrap">Tap to inspect</span>
+              <span className="hidden sm:inline text-[10px] text-slate-400 font-bold tracking-wider uppercase">Hover markers to inspect</span>
             </div>
-            <div className="h-[360px] sm:h-[420px] lg:h-[350px] xl:h-[380px] flex items-center justify-center relative my-4">
+            <div className="relative my-4 w-full flex items-center justify-center">
               <IndiaMap activeProjectId={activeProjectId} setActiveProjectId={setActiveProjectId} projects={PROJECTS} />
             </div>
-            <div className="relative h-20 mt-2">
+            <div className="relative h-24 sm:h-20 mt-2">
               <AnimatePresence mode="wait">
                 {activeProj ? (
-                  <motion.div key={activeProj.id} initial={{ opacity: 0, y: 12, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.97 }} transition={{ duration: 0.25, ease: 'easeOut' }} className="absolute inset-x-0 bottom-0 bg-white/95 backdrop-blur-md border border-orange-500/20 p-4 rounded-2xl flex items-center gap-4 shadow-lg shadow-orange-500/5">
+                  <motion.div key={activeProj.id} initial={{ opacity: 0, y: 12, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.97 }} transition={{ duration: 0.25, ease: 'easeOut' }} className="absolute inset-x-0 bottom-0 bg-white/95 backdrop-blur-md border border-orange-500/20 p-3 sm:p-4 rounded-2xl flex items-center gap-3 sm:gap-4 shadow-lg shadow-orange-500/5">
                     <img src={activeProj.img} alt={activeProj.title} className="w-12 h-12 rounded-xl object-cover border border-slate-100" />
                     <div className="flex-1 min-w-0">
                       <span className="inline-block px-2 py-0.5 bg-orange-50 border border-orange-200/30 text-orange-600 text-[8px] font-bold rounded-full mb-1 uppercase tracking-wider">{activeProj.category}</span>
@@ -168,7 +170,7 @@ const Projects = () => {
                     </div>
                   </motion.div>
                 ) : (
-                  <motion.div key="map-default-note" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-x-0 bottom-0 bg-slate-50 border border-slate-100 p-4 rounded-2xl flex items-center gap-3 text-xs text-slate-500 shadow-sm">
+                  <motion.div key="map-default-note" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-x-0 bottom-0 bg-slate-50 border border-slate-100 p-3 sm:p-4 rounded-2xl flex items-center gap-3 text-xs text-slate-500 shadow-sm">
                     <span className="relative flex h-2.5 w-2.5 shrink-0"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" /><span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500" /></span>
                     <span className="font-medium text-slate-600">Hover project markers to explore regional solar installations.</span>
                   </motion.div>
@@ -179,7 +181,7 @@ const Projects = () => {
 
           {/* Stats Dashboard Column */}
           <div className="lg:col-span-7 flex flex-col justify-between gap-6">
-            <div className="bg-white/95 backdrop-blur-md border border-slate-200/70 rounded-3xl p-6 lg:p-8 flex-1 flex flex-col justify-between" style={{ boxShadow: '0 20px 45px rgba(15,32,68,0.06)' }}>
+            <div className="bg-white/95 backdrop-blur-md border border-slate-200/70 rounded-3xl p-4 sm:p-6 lg:p-8 flex-1 flex flex-col justify-between" style={{ boxShadow: '0 20px 45px rgba(15,32,68,0.06)' }}>
               <div>
                 <span className="section-tag mb-3">Core Performance</span>
                 <h2 className="text-3xl lg:text-4xl font-bold text-[#0f2044] leading-tight mb-4">Powering India's Clean Grid</h2>
@@ -230,18 +232,34 @@ const Projects = () => {
             {filtered.map((project) => {
               const isHoveredOrActive = activeProjectId === project.id;
               return (
-                <motion.div layout key={project.id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.35 }} onMouseEnter={() => setActiveProjectId(project.id)} onMouseLeave={() => setActiveProjectId(null)} className="group relative h-[300px] sm:h-[340px] lg:h-[380px] rounded-2xl sm:rounded-3xl overflow-hidden border cursor-pointer bg-slate-900" style={{
-                  borderColor: isHoveredOrActive ? '#f97316' : '#e2e8f0',
-                  boxShadow: isHoveredOrActive ? '0 20px 50px rgba(249,115,22,0.14)' : '0 4px 16px rgba(15,32,68,0.02)',
-                  transition: 'border-color 400ms ease, box-shadow 400ms ease',
-                }}>
+                <motion.div
+                  layout
+                  key={project.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.35 }}
+                  onMouseEnter={() => setActiveProjectId(project.id)}
+                  onMouseLeave={() => setActiveProjectId(null)}
+                  onClick={() => setActiveProjectId(activeProjectId === project.id ? null : project.id)}
+                  className="group relative h-[300px] sm:h-[340px] lg:h-[380px] rounded-2xl sm:rounded-3xl overflow-hidden border cursor-pointer bg-slate-900"
+                  style={{
+                    borderColor: isHoveredOrActive ? '#f97316' : '#e2e8f0',
+                    boxShadow: isHoveredOrActive ? '0 20px 50px rgba(249,115,22,0.14)' : '0 4px 16px rgba(15,32,68,0.02)',
+                    transition: 'border-color 400ms ease, box-shadow 400ms ease',
+                  }}
+                >
                   <img src={project.img} alt={project.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#010912]/95 via-[#0f2044]/70 to-transparent opacity-95 transition-opacity duration-300" />
                   <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end z-10 text-white">
                     <span className="inline-block px-2.5 sm:px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 text-white rounded-full text-[9px] sm:text-[10px] font-bold tracking-widest uppercase w-max mb-2 sm:mb-3">{project.category}</span>
                     <h3 className="text-lg sm:text-xl font-bold text-white mb-1 sm:mb-1.5 leading-snug group-hover:text-orange-400 transition-colors duration-300">{project.title}</h3>
                     <div className="flex items-center gap-1.5 text-slate-300 text-xs mb-3 sm:mb-4"><FiMapPin className="text-orange-500 shrink-0" size={13} /><span className="truncate">{project.location}</span></div>
-                    <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/15 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <div className={`grid grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/15 transition-all duration-300 ${
+                      isHoveredOrActive
+                        ? 'translate-y-0 opacity-100'
+                        : 'sm:translate-y-3 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100'
+                    }`}>
                       <div className="flex items-center gap-2"><div className="p-1.5 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 shrink-0"><FiZap size={14} /></div><div><p className="text-[8px] text-slate-400 uppercase font-bold tracking-wider">Capacity</p><p className="text-xs font-bold text-orange-400 font-mono">{project.capacity}</p></div></div>
                       <div className="flex items-center gap-2"><div className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-slate-300 shrink-0"><FiCalendar size={14} /></div><div><p className="text-[8px] text-slate-400 uppercase font-bold tracking-wider">Commissioned</p><p className="text-xs font-bold text-white font-mono">{project.year}</p></div></div>
                     </div>

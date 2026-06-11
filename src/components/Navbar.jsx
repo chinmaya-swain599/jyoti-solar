@@ -39,11 +39,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
 
         {/* Logo — overflows navbar intentionally so tagline is visible */}
-        <Link to="/" className="relative h-12 w-52 block group z-[110]">
+        <Link to="/" className="relative h-10 w-40 sm:h-12 sm:w-52 block group z-[110]">
           <img
             src="/logo.png"
             alt="Jyoti Solar — Energizing Tomorrow"
-            className="absolute top-1/2 -translate-y-[45%] left-0 h-[5.5rem] w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] rounded-full"
+            className="absolute top-1/2 -translate-y-[45%] left-0 h-[3.8rem] sm:h-[4.8rem] md:h-[5.5rem] w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] rounded-full transition-all duration-300"
           />
         </Link>
 
