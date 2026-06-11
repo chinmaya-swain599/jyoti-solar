@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { MdOutlineVerified } from 'react-icons/md';
+import logoImg from '../assets/logo.png';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -27,7 +28,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${scrolled
+      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 overflow-visible ${scrolled
           ? 'bg-[#0f2044] shadow-xl py-3 border-b border-white/10'
           : 'bg-[#0f2044] py-4'
         }`}
@@ -37,17 +38,13 @@ const Navbar = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group mt-[2px]">
-          <div className="w-10 h-10 rounded-lg bg-[#f97316] flex items-center justify-center shadow-lg group-hover:bg-[#ea6a0a] transition-colors">
-            <span className="text-white font-bold text-sm tracking-tight">JS</span>
-          </div>
-          <div>
-            <span className="font-bold text-lg text-white tracking-widest hidden sm:block leading-none">
-              JYOTI <span className="text-[#f97316]">SOLAR</span>
-            </span>
-            <span className="text-[10px] text-blue-200/60 tracking-[0.15em] uppercase hidden sm:block">Energizing Tomorrow</span>
-          </div>
+        {/* Logo — overflows navbar intentionally so tagline is visible */}
+        <Link to="/" className="relative h-12 w-52 block group z-[110]">
+          <img
+            src="/logo.png"
+            alt="Jyoti Solar — Energizing Tomorrow"
+            className="absolute top-1/2 -translate-y-[45%] left-0 h-[5.5rem] w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] rounded-full"
+          />
         </Link>
 
         {/* Desktop Nav */}

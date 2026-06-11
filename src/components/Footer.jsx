@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { MdSolarPower, MdLocationOn, MdPhone, MdEmail } from 'react-icons/md';
+import logoImg from '../assets/logo.png';
 
 const QUICK_LINKS = [
   { label: 'About Us',     path: '/about' },
@@ -42,15 +43,11 @@ const Footer = () => {
           {/* Brand column */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-lg bg-[#f97316] flex items-center justify-center shadow-lg">
-                <MdSolarPower className="text-white text-xl" />
-              </div>
-              <div>
-                <span className="font-bold text-base tracking-widest text-white block leading-none">
-                  JYOTI <span className="text-[#f97316]">SOLAR</span>
-                </span>
-                <span className="text-[10px] text-blue-200/50 tracking-[0.15em] uppercase">Energizing Tomorrow</span>
-              </div>
+              <img
+                src={logoImg}
+                alt="Jyoti Solar Logo"
+                className="h-16 w-auto object-contain drop-shadow-lg"
+              />
             </Link>
             <p className="text-blue-100/60 text-sm leading-relaxed mb-5">
               India's trusted solar infrastructure partner — delivering clean, reliable, and scalable renewable energy solutions since 2010. Partner of national solar mission.

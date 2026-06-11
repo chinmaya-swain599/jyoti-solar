@@ -108,7 +108,7 @@ const Home = () => {
       ══════════════════════════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center overflow-hidden"
+        className="relative min-h-screen flex flex-col pt-24 pb-12"
         style={{ background: '#010914' }}
       >
         {/* ── Animated solar farm canvas background ── */}
@@ -124,11 +124,11 @@ const Home = () => {
         />
 
         {/* Main content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-24 pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mt-auto mb-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
             {/* ── Left ── */}
-            <div className="space-y-8">
+            <div className="space-y-5">
 
               {/* Badge */}
               <motion.div
@@ -137,9 +137,9 @@ const Home = () => {
                 transition={{ duration: 0.6 }}
                 className="inline-flex items-center gap-3"
               >
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm">
-                  <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
-                  <span className="text-orange-400 text-xs font-semibold tracking-[0.2em] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>National Solar Mission Partner</span>
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+                  <span className="text-orange-400 text-[10px] font-semibold tracking-[0.2em] uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>National Solar Mission Partner</span>
                 </div>
               </motion.div>
 
@@ -149,7 +149,7 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
               >
-                <h1 className="font-hero" style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)' }}>
+                <h1 className="font-hero" style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.75rem)' }}>
                   <span className="block text-white">Powering</span>
                   <span className="block">
                     <span className="text-white">India's{' '}</span>
@@ -175,7 +175,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.25 }}
-                className="text-slate-300 text-lg md:text-xl leading-[1.7] max-w-lg"
+                className="text-slate-300 text-base md:text-lg leading-[1.6] max-w-lg"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400 }}
               >
                 Jyoti Solar is a leading EPC contractor delivering utility-scale solar infrastructure — from grid-scale parks to rooftop systems — empowering the nation with clean energy.
@@ -191,7 +191,7 @@ const Home = () => {
                 <button
                   id="hero-explore-btn"
                   onClick={() => navigate('/projects')}
-                  className="group relative flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
+                  className="group relative flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
                   style={{
                     background: 'linear-gradient(135deg, #f97316, #ea580c)',
                     boxShadow: '0 8px 32px rgba(249,115,22,0.4)',
@@ -204,7 +204,7 @@ const Home = () => {
                 <button
                   id="hero-tenders-btn"
                   onClick={() => navigate('/tenders')}
-                  className="flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white border border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/15 hover:border-white/40 transition-all duration-300 hover:scale-105 cursor-pointer"
+                  className="flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white border border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/15 hover:border-white/40 transition-all duration-300 hover:scale-105 cursor-pointer"
                 >
                   View Tenders
                   <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -257,7 +257,7 @@ const Home = () => {
                 <img
                   src={megaSolarFarm}
                   alt="Mega Solar Project"
-                  className="w-full h-auto object-cover aspect-[4/3]"
+                  className="w-full h-auto object-cover aspect-[16/10]"
                 />
                 {/* Overlay shimmer */}
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.1) 0%, transparent 50%, rgba(26,58,107,0.2) 100%)' }} />
